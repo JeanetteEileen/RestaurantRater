@@ -1,7 +1,47 @@
 ﻿
+@model IEnumerable<RestaurantRater.Models.Restaurant>
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>List of Restaurants</h2>
+<p>
+    @Html.ActionLink("Rate a Restaurant", "Create")
+</p>
 
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rating)<!--goes to models and gets this property-->
+        </th>
+        <th>
+
+        </th>
+    </tr><!--end header row-->
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </td>
+            <td>
+                @Html.ActionLink("Change", "Edit", new { id = item.RestaurantID }) |<!--The change is what appears on screen, Edit is what it is doing-->
+                @Html.ActionLink("More Info", "Details", new { id = item.RestaurantID }) |
+                @Html.ActionLink("Remove", "Delete", new { id = item.RestaurantID }) |
+            </td>
+        </tr>
+    }
+
+</table>
